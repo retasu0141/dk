@@ -26,30 +26,7 @@ import datetime
 
 
 
-options = Options()
-options.add_argument('--incognito')
-options.add_experimental_option('detach', True)
-#driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
-driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
 
-driver.get("https://www.musasi.jp/kurume/login")
-driver.set_window_size(1300, 841)
-wait = WebDriverWait(driver, 2)
-WebDriverWait(driver, 8).until(EC.presence_of_all_elements_located)
-
-WebDriverWait(driver, 4).until(EC.element_to_be_clickable((By.ID, "signin_username"))).click()
-WebDriverWait(driver, 4).until(EC.element_to_be_clickable((By.ID, "signin_username"))).send_keys("30626")
-
-WebDriverWait(driver, 4).until(EC.element_to_be_clickable((By.ID, "signin_password"))).click()
-WebDriverWait(driver, 4).until(EC.element_to_be_clickable((By.ID, "signin_password"))).send_keys("01234")
-
-WebDriverWait(driver, 4).until(EC.element_to_be_clickable((By.NAME, "Signin"))).click()
-sleep(0.2)
-WebDriverWait(driver, 4).until(EC.element_to_be_clickable((By.ID, "selfStudy"))).click()
-sleep(0.2)
-WebDriverWait(driver, 4).until(EC.element_to_be_clickable((By.ID, "excersise"))).click()
-sleep(0.2)
-WebDriverWait(driver, 4).until(EC.element_to_be_clickable((By.ID, "testRehearsal"))).click()
 
 
 
@@ -73,6 +50,30 @@ async def on_message(message):
 @bot.command(aliases=["開始","スタート"])
 async def start(ctx):
     await ctx.send("開始します。画像と問題文が送られます。\n回答の際は[!まよった]の入力の有無後に[!まる]か[!ばつ]で答えてください。\n問題を終了する際は[!終了]と送信してください。\n\n")
+    options = Options()
+    options.add_argument('--incognito')
+    options.add_experimental_option('detach', True)
+    #driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+    driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+
+    driver.get("https://www.musasi.jp/kurume/login")
+    driver.set_window_size(1300, 841)
+    wait = WebDriverWait(driver, 2)
+    WebDriverWait(driver, 8).until(EC.presence_of_all_elements_located)
+
+    WebDriverWait(driver, 4).until(EC.element_to_be_clickable((By.ID, "signin_username"))).click()
+    WebDriverWait(driver, 4).until(EC.element_to_be_clickable((By.ID, "signin_username"))).send_keys("30626")
+
+    WebDriverWait(driver, 4).until(EC.element_to_be_clickable((By.ID, "signin_password"))).click()
+    WebDriverWait(driver, 4).until(EC.element_to_be_clickable((By.ID, "signin_password"))).send_keys("01234")
+
+    WebDriverWait(driver, 4).until(EC.element_to_be_clickable((By.NAME, "Signin"))).click()
+    sleep(0.2)
+    WebDriverWait(driver, 4).until(EC.element_to_be_clickable((By.ID, "selfStudy"))).click()
+    sleep(0.2)
+    WebDriverWait(driver, 4).until(EC.element_to_be_clickable((By.ID, "excersise"))).click()
+    sleep(0.2)
+    WebDriverWait(driver, 4).until(EC.element_to_be_clickable((By.ID, "testRehearsal"))).click()
     driver.get("https://www.musasi.jp/workbook/3/4411/no?workbook=17&start={}".format(str(r.choice([1,2,3,4,5,6]))))
     wait = WebDriverWait(driver, 2)
     WebDriverWait(driver, 8).until(EC.presence_of_all_elements_located)
