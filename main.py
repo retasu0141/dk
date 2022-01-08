@@ -26,11 +26,12 @@ import datetime
 
 
 
-options = Options()
-options.add_argument('--incognito')
-options.add_experimental_option('detach', True)
-#driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
-driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+chrome_options = Options()
+chrome_options.binary_location = GOOGLE_CHROME_BIN
+chrome_options.add_argument('--disable-gpu')
+chrome_options.add_argument('--no-sandbox')
+driver = webdriver.Chrome(executable_path=CHROMEDRIVER_PATH, chrome_options=chrome_options)
+
 driver.get("https://www.musasi.jp/kurume/login")
 wait = WebDriverWait(driver, 2)
 WebDriverWait(driver, 8).until(EC.presence_of_all_elements_located)
