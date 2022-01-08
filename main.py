@@ -30,7 +30,7 @@ import datetime
 
 
 
-bot = commands.Bot(command_prefix="!",activity=discord.Game("!help"))
+bot = commands.Bot(command_prefix="!",activity=discord.Game("!スタート"))
 bot.remove_command('help')
 token = os.environ['DISCORD_BOT_TOKEN']
 matti_data = {}
