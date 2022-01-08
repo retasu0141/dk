@@ -33,7 +33,7 @@ options.add_experimental_option('detach', True)
 driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
 
 driver.get("https://www.musasi.jp/kurume/login")
-driver.set_window_size(1000, 541)
+driver.set_window_size(1100, 641)
 wait = WebDriverWait(driver, 2)
 WebDriverWait(driver, 8).until(EC.presence_of_all_elements_located)
 
