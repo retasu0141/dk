@@ -57,6 +57,8 @@ async def on_message(message):
 
 @bot.command(aliases=["開始","スタート"])
 async def start(ctx):
+    global driver
+    global WebDriverWait
     await ctx.send("開始します。画像と問題文が送られます。\n回答の際は[!まよった]の入力の有無後に[!まる]か[!ばつ]で答えてください。\n問題を終了する際は[!終了]と送信してください。\n\n")
     options = Options()
     options.add_argument('--incognito')
@@ -97,12 +99,16 @@ async def start(ctx):
 
 @bot.command(aliases=["迷った","まよった"])
 async def unsure(ctx):
+    global driver
+    global WebDriverWait
     a_data = WebDriverWait(driver, 4).until(EC.presence_of_element_located((By.ID, "questionsItems")))
     a_data.find_element_by_xpath('//a[@id="btn_unsure"]').click()
 
 
 @bot.command(aliases=["まる","丸"])
 async def true(ctx):
+    global driver
+    global WebDriverWait
     a_data = WebDriverWait(driver, 4).until(EC.presence_of_element_located((By.ID, "questionsItems")))
     #a_data.find_element_by_xpath('//a[@id="btn_unsure"]').click()
     a_data.find_element_by_xpath('//a[@class="btn_true"]').click()
@@ -119,6 +125,8 @@ async def true(ctx):
 
 @bot.command(aliases=["ばつ","×"])
 async def false(ctx):
+    global driver
+    global WebDriverWait
     a_data = WebDriverWait(driver, 4).until(EC.presence_of_element_located((By.ID, "questionsItems")))
     #a_data.find_element_by_xpath('//a[@id="btn_unsure"]').click()
     #a_data.find_element_by_xpath('//a[@class="btn_true"]').click()
@@ -134,6 +142,8 @@ async def false(ctx):
 
 @bot.command(aliases=["終了","おわり"])
 async def finish(ctx):
+    global driver
+    global WebDriverWait
     await ctx.send("お疲れ様です。結果と間違えた問題の写真を送信します。\n\n")
     WebDriverWait(driver, 4).until(EC.element_to_be_clickable((By.ID, "btn_finish"))).click()
     WebDriverWait(driver, 4).until(EC.element_to_be_clickable((By.ID, "btn_finishResultConfirm"))).click()
