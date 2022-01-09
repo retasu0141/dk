@@ -58,6 +58,12 @@ async def on_message(message):
 @bot.command(aliases=["開始","スタート"])
 async def start(ctx):
     await ctx.send("開始します。画像と問題文が送られます。\n回答の際は[!まよった]の入力の有無後に[!まる]か[!ばつ]で答えてください。\n問題を終了する際は[!終了]と送信してください。\n\n")
+    options = Options()
+    options.add_argument('--incognito')
+    options.add_experimental_option('detach', True)
+    #driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+    driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+
     driver.get("https://www.musasi.jp/kurume/login")
     driver.set_window_size(1300, 841)
     wait = WebDriverWait(driver, 2)
